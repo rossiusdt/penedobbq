@@ -1,8 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
-const BUCKPAY_TOKEN = Deno.env.get("BUCKPAY_TOKEN") ?? "sk_live_e2498402a1af2f57d815583f2ae52175";
-const BUCKPAY_USER_AGENT = Deno.env.get("BUCKPAY_USER_AGENT") ?? "Buckpay API";
-const BUCKPAY_BASE = "https://api.realtechdev.com.br";
+const ALLOWPAY_API_KEY = Deno.env.get("ALLOWPAY_API_KEY") ?? "allow_apikey_956nof1obs";
+const ALLOWPAY_BASE = "https://allow-gi0i.onrender.com";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -18,14 +17,22 @@ Deno.serve(async (req: Request) => {
   try {
     const body = await req.json();
 
-    const res = await fetch(`${BUCKPAY_BASE}/v1/transactions`, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${BUCKPAY_TOKEN}`,
-        "Content-Type": "application/json",
-        "User-Agent": BUCKPAY_USER_AGENT,
+    const payload = {
+      api_key: ALLOWPAY_API_KEY,
+      amount: body.amount,
+      description: body.description ?? "Ingresso",
+      customer: {
+        name: body.customer?.name,
+        email: body.customer?.email,
+        cellphone: body.customer?.cellphone,
+        taxId: body.customer?.taxId,
       },
-      body: JSON.stringify(body),
+    };
+
+    const res = await fetch(`${ALLOWPAY_BASE}/api/v2/allowpay-seller/create-pix`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
 
     let data: unknown;
@@ -36,7 +43,7 @@ Deno.serve(async (req: Request) => {
       data = { raw: text };
     }
 
-    console.log("BuckPay response", res.status, JSON.stringify(data).slice(0, 2000));
+    console.log("AllowPay create-pix response", res.status, JSON.stringify(data).slice(0, 2000));
 
     return new Response(JSON.stringify(data), {
       status: res.status,
@@ -44,7 +51,7 @@ Deno.serve(async (req: Request) => {
     });
   } catch (err) {
     return new Response(
-      JSON.stringify({ error: { detail: err instanceof Error ? err.message : "Internal error" } }),
+      JSON.stringify({ error: err instanceof Error ? err.message : "Internal error" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }

@@ -311,7 +311,7 @@ export default function CheckoutModal({ isOpen, onClose, selectedSummary, items,
               <div className="bg-white border-2 border-gray-100 rounded-2xl p-4 shadow-inner">
                 {qrcode ? (
                   <img
-                    src={qrcode.startsWith('data:') ? qrcode : `data:image/png;base64,${qrcode}`}
+                    src={qrcode}
                     alt="QR Code Pix"
                     className="w-48 h-48 object-contain"
                   />
