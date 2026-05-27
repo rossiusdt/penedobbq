@@ -37,13 +37,20 @@ export interface PixTransaction {
 
 export async function createPix(params: CreatePixParams): Promise<PixTransaction> {
   const body = {
+    external_id: params.externalId,
+    payment_method: "pix",
     amount: params.amount,
-    description: params.items.map(i => i.title).join(', '),
-    customer: {
+    pix: { expires_in_days: 1 },
+    items: params.items.map(i => ({
+      title: i.title,
+      unit_price: i.unitPrice,
+      quantity: i.quantity,
+    })),
+    buyer: {
       name: params.customer.name,
       email: params.customer.email,
-      cellphone: params.customer.phone,
-      taxId: params.customer.cpf,
+      cpf: params.customer.cpf,
+      phone: `55${params.customer.phone}`,
     },
   };
 
@@ -61,16 +68,18 @@ export async function createPix(params: CreatePixParams): Promise<PixTransaction
     throw new Error(`Resposta inválida do servidor (${res.status}): ${text.slice(0, 200)}`);
   }
 
-  if (!res.ok || data?.error) {
-    const msg = typeof data?.error === 'string' ? data.error : JSON.stringify(data?.error ?? data);
+  if (!res.ok) {
+    const detail = data?.error?.detail ?? data?.message ?? data?.error ?? data;
+    const msg = typeof detail === 'string' ? detail : JSON.stringify(detail);
     throw new Error(msg || `Erro ao gerar Pix (${res.status})`);
   }
 
+  const tx = data.data ?? data;
   return {
-    id: data.txid as string,
-    brcode: data.pix_code as string ?? "",
-    qrcode: data.pix_qr_code as string ?? "",
-    status: "pending",
+    id: tx.id,
+    brcode: tx.pix?.code ?? "",
+    qrcode: tx.pix?.qrcode_base64 ?? "",
+    status: tx.status,
   };
 }
 
@@ -89,7 +98,6 @@ export async function getTransactionStatus(id: string): Promise<string> {
   } catch {
     return "unknown";
   }
-
-  // AllowPay returns { status: "paid" | "pending" | ... }
-  return (data.status as string) ?? "unknown";
+  const tx = (data.data ?? data) as Record<string, unknown>;
+  return tx.status as string;
 }

@@ -1,11 +1,12 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
-const ALLOWPAY_API_KEY = Deno.env.get("ALLOWPAY_API_KEY") ?? "allow_apikey_956nof1obs";
-const ALLOWPAY_BASE = "https://allow-gi0i.onrender.com";
+const BUCKPAY_TOKEN = Deno.env.get("BUCKPAY_TOKEN") ?? "sk_live_e2498402a1af2f57d815583f2ae52175";
+const BUCKPAY_USER_AGENT = Deno.env.get("BUCKPAY_USER_AGENT") ?? "Buckpay API";
+const BUCKPAY_BASE = "https://api.realtechdev.com.br";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Client-Info, Apikey",
 };
 
@@ -16,30 +17,24 @@ Deno.serve(async (req: Request) => {
 
   try {
     const url = new URL(req.url);
-    const txid = url.searchParams.get("id");
+    const id = url.searchParams.get("id");
 
-    if (!txid) {
+    if (!id) {
       return new Response(
-        JSON.stringify({ error: "Missing transaction id" }),
+        JSON.stringify({ error: { detail: "Missing transaction id" } }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    const res = await fetch(`${ALLOWPAY_BASE}/api/v2/allowpay-seller/payment-status`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ api_key: ALLOWPAY_API_KEY, txid }),
+    const res = await fetch(`${BUCKPAY_BASE}/v1/transactions/${id}`, {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${BUCKPAY_TOKEN}`,
+        "User-Agent": BUCKPAY_USER_AGENT,
+      },
     });
 
-    let data: unknown;
-    const text = await res.text();
-    try {
-      data = JSON.parse(text);
-    } catch {
-      data = { raw: text };
-    }
-
-    console.log("AllowPay payment-status response", res.status, JSON.stringify(data).slice(0, 2000));
+    const data = await res.json();
 
     return new Response(JSON.stringify(data), {
       status: res.status,
@@ -47,7 +42,7 @@ Deno.serve(async (req: Request) => {
     });
   } catch (err) {
     return new Response(
-      JSON.stringify({ error: err instanceof Error ? err.message : "Internal error" }),
+      JSON.stringify({ error: { detail: err instanceof Error ? err.message : "Internal error" } }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }

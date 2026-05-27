@@ -7,29 +7,28 @@ export default function EventHero() {
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div className="space-y-6">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight drop-shadow-lg text-white">
-              Bruna Louise | Meus 15 Anos!
+              Penedo BBQ Festival
             </h1>
 
             <div className="space-y-3">
               <div className="flex items-start gap-3">
                 <Calendar className="w-5 h-5 mt-1 flex-shrink-0 text-[#e8a838]" />
                 <div>
-                  <p className="font-semibold text-white">20/06 e 16/07</p>
+                  <p className="font-semibold text-white">05 de Setembro de 2026</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
                 <Clock className="w-5 h-5 mt-1 flex-shrink-0 text-[#e8a838]" />
                 <div>
-                  <p className="font-semibold text-white">20:00</p>
+                  <p className="font-semibold text-white">A partir das 13:00</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 mt-1 flex-shrink-0 text-[#e8a838]" />
                 <div>
-                  <p className="font-semibold text-white">Evento presencial em <span className="text-[#e8a838]">Teatro Oficina do Estudante Iguatemi</span></p>
-                  <p className="text-sm text-white/70">3º piso do Shopping Iguatemi Campinas</p>
+                  <p className="font-semibold text-white">Evento presencial em <span className="text-[#e8a838]">Penedo - Itatiaia/RJ</span></p>
                 </div>
               </div>
             </div>
@@ -51,8 +50,8 @@ export default function EventHero() {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="/Awr9QWq.png"
-                alt="Bruna Louise | Meus 15 Anos!"
+                src="/Gemini_Generated_Image_qr2qeoqr2qeoqr2q.png"
+                alt="Penedo BBQ Festival"
                 className="w-full h-full object-cover"
               />
             </div>
