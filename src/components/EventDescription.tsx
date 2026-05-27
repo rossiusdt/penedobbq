@@ -6,22 +6,17 @@ export default function EventDescription() {
 
         <div className="space-y-4 text-gray-700">
           <p>
-            Prepare-se para viver uma experiência que vai muito além do churrasco.
+            Depois do enorme sucesso de "O Que Passa na Cabeça Dela", Bruna Louise retorna aos palcos em 2026 com um espetáculo totalmente inédito, ainda mais afiado, ousado e com a marca registrada que conquistou plateias em todo o país.
           </p>
           <p>
-            O Penedo BBQ Festival chega trazendo cortes premium, burgers insanos, muito fogo, música ao vivo e aquele clima perfeito pra curtir com os amigos e a família!
+            Neste novo show, Bruna mergulha em histórias inéditas, situações do cotidiano e reflexões sobre relacionamentos, autoestima, vida adulta e, claro, as loucuras que passam pela cabeça de uma mulher moderna que não tem medo de falar o que pensa. Com seu humor direto, inteligente e sem papas na língua, Bruna entrega um espetáculo eletrizante, repleto de improvisos, identificação e gargalhadas do início ao fim.
           </p>
-          <div className="space-y-2">
-            <p className="font-semibold text-gray-900">Pode esperar:</p>
-            <ul className="space-y-1">
-              <li>Gastronomia</li>
-              <li>Chopp gelado</li>
-              <li>Shows ao vivo</li>
-              <li>Chefs Assadores</li>
-              <li>Experiências instagramáveis</li>
-              <li>Sabores que vão marcar sua memória</li>
-            </ul>
-          </div>
+          <p>
+            A plateia pode esperar uma Bruna ainda mais madura artisticamente, mas tão ácida, autêntica e corajosa quanto sempre foi. Um show para rir, pensar, se identificar — e sair comentando.
+          </p>
+          <p className="font-semibold text-gray-900">
+            Bruna Louise em seu novo show: imperdível, intenso e absolutamente ela.
+          </p>
         </div>
 
       </section>
