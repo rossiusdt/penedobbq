@@ -2,46 +2,47 @@ import { Calendar, MapPin, Share2, ShieldCheck, Clock } from 'lucide-react';
 
 export default function EventHero() {
   return (
-    <div className="bg-gradient-to-br from-[#1a0a0a] via-[#3d0f0f] to-[#1a0a0a] text-white">
+    <div className="bg-gradient-to-br from-[#1a0510] via-[#3d0d25] to-[#1a0510] text-white">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div className="space-y-6">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight drop-shadow-lg text-white">
-              Penedo BBQ Festival
+              Bruna Louise | Meus 15 Anos!
             </h1>
 
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <Calendar className="w-5 h-5 mt-1 flex-shrink-0 text-[#e8a838]" />
+                <Calendar className="w-5 h-5 mt-1 flex-shrink-0 text-[#e8a0b8]" />
                 <div>
-                  <p className="font-semibold text-white">05 de Setembro de 2026</p>
+                  <p className="font-semibold text-white">20 de Junho e 16 de Julho de 2026</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <Clock className="w-5 h-5 mt-1 flex-shrink-0 text-[#e8a838]" />
+                <Clock className="w-5 h-5 mt-1 flex-shrink-0 text-[#e8a0b8]" />
                 <div>
-                  <p className="font-semibold text-white">A partir das 13:00</p>
+                  <p className="font-semibold text-white">A partir das 20:00</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 mt-1 flex-shrink-0 text-[#e8a838]" />
+                <MapPin className="w-5 h-5 mt-1 flex-shrink-0 text-[#e8a0b8]" />
                 <div>
-                  <p className="font-semibold text-white">Evento presencial em <span className="text-[#e8a838]">Penedo - Itatiaia/RJ</span></p>
+                  <p className="font-semibold text-white">Evento presencial em <span className="text-[#e8a0b8]">Teatro Oficina do Estudante Iguatemi</span></p>
+                  <p className="text-sm text-white/70">3º piso do Shopping Iguatemi Campinas</p>
                 </div>
               </div>
             </div>
 
-            <div className="inline-flex items-center gap-2.5 bg-white/10 border border-[#e8a838]/50 backdrop-blur-sm rounded-2xl px-4 py-2.5">
+            <div className="inline-flex items-center gap-2.5 bg-white/10 border border-[#e8a0b8]/50 backdrop-blur-sm rounded-2xl px-4 py-2.5">
               <div className="relative flex-shrink-0">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#e8a838] to-[#b5771a] flex items-center justify-center shadow">
-                  <ShieldCheck className="w-4 h-4 text-[#1a0a0a]" strokeWidth={2.5} />
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#e8a0b8] to-[#c0607a] flex items-center justify-center shadow">
+                  <ShieldCheck className="w-4 h-4 text-[#1a0510]" strokeWidth={2.5} />
                 </div>
-                <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-400 border-2 border-[#1a0a0a]" />
+                <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-green-400 border-2 border-[#1a0510]" />
               </div>
               <div className="leading-tight">
-                <p className="text-[10px] font-semibold text-[#e8a838] uppercase tracking-widest">Oficial</p>
+                <p className="text-[10px] font-semibold text-[#e8a0b8] uppercase tracking-widest">Oficial</p>
                 <p className="text-xs font-bold text-white">Única página de vendas</p>
               </div>
             </div>
@@ -50,13 +51,13 @@ export default function EventHero() {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="/Gemini_Generated_Image_qr2qeoqr2qeoqr2q.png"
-                alt="Penedo BBQ Festival"
+                src="/Awr9QWq.png"
+                alt="Bruna Louise | Meus 15 Anos"
                 className="w-full h-full object-cover"
               />
             </div>
 
-            <button className="absolute top-4 right-4 bg-white/90 text-[#3d0f0f] px-4 py-2 rounded-full font-semibold flex items-center gap-2 shadow-lg hover:bg-white transition-colors">
+            <button className="absolute top-4 right-4 bg-white/90 text-[#3d0d25] px-4 py-2 rounded-full font-semibold flex items-center gap-2 shadow-lg hover:bg-white transition-colors">
               <Share2 className="w-4 h-4" />
               COMPARTILHAR
             </button>

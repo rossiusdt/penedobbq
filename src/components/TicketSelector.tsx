@@ -42,7 +42,7 @@ export default function TicketSelector() {
   };
 
   const pixItems = selectedTicket
-    ? [{ title: `${selectedTicket.label} — Penedo BBQ Festival`, unitPrice: selectedTicket.price, quantity: qty }]
+    ? [{ title: `${selectedTicket.label} — Bruna Louise | Meus 15 Anos`, unitPrice: selectedTicket.price, quantity: qty }]
     : [];
 
   const selectedSummary = selectedTicket
@@ -67,14 +67,14 @@ export default function TicketSelector() {
                   onClick={() => setSelected(isSelected ? null : ticket.id)}
                   className={`w-full text-left border-2 rounded-xl p-4 transition-all ${
                     isSelected
-                      ? 'border-[#3d0f0f] bg-red-50'
-                      : 'border-gray-200 hover:border-red-300'
+                      ? 'border-[#3d0d25] bg-pink-50'
+                      : 'border-gray-200 hover:border-pink-300'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex-1">
                       {ticket.badge && (
-                        <span className="text-xs font-bold text-white bg-[#3d0f0f] px-2 py-0.5 rounded-full uppercase tracking-wide mb-1 inline-block">
+                        <span className="text-xs font-bold text-white bg-[#3d0d25] px-2 py-0.5 rounded-full uppercase tracking-wide mb-1 inline-block">
                           {ticket.badge}
                         </span>
                       )}
@@ -88,13 +88,13 @@ export default function TicketSelector() {
                 </button>
 
                 {isSelected && ticket.hasQuantity && (
-                  <div className="border-x-2 border-b-2 border-[#3d0f0f] rounded-b-xl bg-red-50 px-4 py-3 flex items-center justify-between -mt-1">
+                  <div className="border-x-2 border-b-2 border-[#3d0d25] rounded-b-xl bg-pink-50 px-4 py-3 flex items-center justify-between -mt-1">
                     <span className="text-sm font-medium text-gray-700">Quantidade</span>
                     <div className="flex items-center gap-3">
                       <button
                         onClick={() => changeQty(ticket.id, -1)}
                         disabled={ticketQty <= 1}
-                        className="w-8 h-8 rounded-full border-2 border-[#3d0f0f] flex items-center justify-center text-[#3d0f0f] hover:bg-[#3d0f0f] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        className="w-8 h-8 rounded-full border-2 border-[#3d0d25] flex items-center justify-center text-[#3d0d25] hover:bg-[#3d0d25] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                       >
                         <Minus className="w-3.5 h-3.5" />
                       </button>
@@ -102,12 +102,12 @@ export default function TicketSelector() {
                       <button
                         onClick={() => changeQty(ticket.id, 1)}
                         disabled={ticketQty >= 20}
-                        className="w-8 h-8 rounded-full border-2 border-[#3d0f0f] flex items-center justify-center text-[#3d0f0f] hover:bg-[#3d0f0f] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        className="w-8 h-8 rounded-full border-2 border-[#3d0d25] flex items-center justify-center text-[#3d0d25] hover:bg-[#3d0d25] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                       >
                         <Plus className="w-3.5 h-3.5" />
                       </button>
                     </div>
-                    <span className="text-sm font-bold text-[#3d0f0f]">{formatCurrency(ticket.price * ticketQty)}</span>
+                    <span className="text-sm font-bold text-[#3d0d25]">{formatCurrency(ticket.price * ticketQty)}</span>
                   </div>
                 )}
               </div>

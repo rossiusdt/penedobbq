@@ -17,7 +17,7 @@ export default function Footer() {
             <div className="flex items-center gap-4 flex-wrap">
               {/* Google Safe Browsing */}
               <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2">
-                <div className="w-7 h-7 rounded-full bg-[#3d0f0f] flex items-center justify-center flex-shrink-0">
+                <div className="w-7 h-7 rounded-full bg-[#3d0d25] flex items-center justify-center flex-shrink-0 shadow">
                   <Shield className="w-4 h-4 text-white" strokeWidth={2.5} />
                 </div>
                 <div className="leading-tight">
@@ -48,7 +48,7 @@ export default function Footer() {
                 href="https://sympla.com.br/ajuda"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#3d0f0f] hover:underline"
+                className="text-[#3d0d25] hover:underline"
               >
                 Central de Ajuda
               </a>{' '}
@@ -57,7 +57,7 @@ export default function Footer() {
 
             <a
               href="mailto:contato@modasememoriasevento.com.br"
-              className="inline-flex items-center gap-2 border-2 border-[#3d0f0f] text-[#3d0f0f] font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-red-50 transition-colors"
+              className="inline-flex items-center gap-2 border-2 border-[#3d0d25] text-[#3d0d25] font-semibold text-sm px-5 py-2.5 rounded-lg hover:bg-pink-50 transition-colors"
             >
               <Mail className="w-4 h-4" />
               Fale com o produtor
@@ -68,7 +68,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-400">
-          <p>© {new Date().getFullYear()} Pier Rock Festival. Todos os direitos reservados.</p>
+          <p>© {new Date().getFullYear()} Bruna Louise. Todos os direitos reservados.</p>
           <div className="flex items-center gap-1">
             <span>Vendas via</span>
             <img src="/sympla-logo.png" alt="Sympla" className="h-4 ml-1 opacity-60" />

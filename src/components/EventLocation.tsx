@@ -7,24 +7,25 @@ export default function EventLocation() {
 
       <div className="space-y-4">
         <div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">Penedo - Itatiaia/RJ</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">Teatro Oficina do Estudante Iguatemi</h3>
           <div className="text-gray-600 space-y-1">
-            <p>Penedo, Itatiaia - RJ</p>
+            <p>3º piso do Shopping Iguatemi Campinas</p>
+            <p>Campinas - SP</p>
           </div>
         </div>
 
-        <button className="flex items-center gap-2 text-[#3d0f0f] hover:text-[#5a1515] font-semibold border border-[#3d0f0f] hover:border-[#5a1515] px-4 py-2 rounded-full transition-colors">
+        <button className="flex items-center gap-2 text-[#3d0d25] hover:text-[#5a1540] font-semibold border border-[#3d0d25] hover:border-[#5a1540] px-4 py-2 rounded-full transition-colors">
           <MapPin className="w-4 h-4" />
           VER NO MAPA
         </button>
 
         <div className="pt-6 border-t">
           <div className="flex flex-wrap gap-4 text-sm">
-            <a href="#" className="text-[#3d0f0f] hover:text-[#5a1515] flex items-center gap-1">
+            <a href="#" className="text-[#3d0d25] hover:text-[#5a1540] flex items-center gap-1">
               Termos e políticas
               <ExternalLink className="w-3 h-3" />
             </a>
-            <a href="#" className="text-[#3d0f0f] hover:text-[#5a1515] flex items-center gap-1">
+            <a href="#" className="text-[#3d0d25] hover:text-[#5a1540] flex items-center gap-1">
               Denunciar este evento
               <ExternalLink className="w-3 h-3" />
             </a>

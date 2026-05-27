@@ -6,20 +6,19 @@ export default function EventDescription() {
 
         <div className="space-y-4 text-gray-700">
           <p>
-            Prepare-se para viver uma experiência que vai muito além do churrasco.
+            Bruna Louise celebra 15 anos de stand up comedy do jeito mais especial possível — com muito humor, emoção e um show inesquecível!
           </p>
           <p>
-            O Penedo BBQ Festival chega trazendo cortes premium, burgers insanos, muito fogo, música ao vivo e aquele clima perfeito pra curtir com os amigos e a família!
+            Conhecida por seus textos afiados, histórias pessoais e uma pitada de drama, Bruna convida você para essa festa única onde a valsa foi cancelada por falta de pai, mas o ingresso você garante agora!
           </p>
           <div className="space-y-2">
-            <p className="font-semibold text-gray-900">Pode esperar:</p>
-            <ul className="space-y-1">
-              <li>Gastronomia</li>
-              <li>Chopp gelado</li>
-              <li>Shows ao vivo</li>
-              <li>Chefs Assadores</li>
-              <li>Experiências instagramáveis</li>
-              <li>Sabores que vão marcar sua memória</li>
+            <p className="font-semibold text-gray-900">O que esperar:</p>
+            <ul className="space-y-1 list-disc list-inside">
+              <li>Stand up comedy ao vivo</li>
+              <li>Histórias reais e hilárias</li>
+              <li>15 anos de carreira celebrados em grande estilo</li>
+              <li>Uma noite cheia de risadas e emoção</li>
+              <li>Experiência teatral única</li>
             </ul>
           </div>
         </div>

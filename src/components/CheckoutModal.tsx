@@ -203,7 +203,7 @@ export default function CheckoutModal({ isOpen, onClose, selectedSummary, items,
         }`}
       >
         {/* Header */}
-        <div className="relative bg-gradient-to-r from-[#1a0a0a] to-[#3d0f0f] px-6 pt-8 pb-6 text-center">
+        <div className="relative bg-gradient-to-r from-[#1a0510] to-[#3d0d25] px-6 pt-8 pb-6 text-center">
           <button
             onClick={handleClose}
             className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors"
@@ -286,7 +286,7 @@ export default function CheckoutModal({ isOpen, onClose, selectedSummary, items,
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-[#1a0a0a] to-[#3d0f0f] hover:from-[#0d0505] hover:to-[#5a1515] disabled:opacity-60 text-white font-bold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
+                className="w-full bg-gradient-to-r from-[#1a0510] to-[#3d0d25] hover:from-[#0d0505] hover:to-[#5a1540] disabled:opacity-60 text-white font-bold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
               >
                 {loading ? (
                   <><Loader2 className="w-4 h-4 animate-spin" /> Gerando Pix...</>
@@ -331,7 +331,7 @@ export default function CheckoutModal({ isOpen, onClose, selectedSummary, items,
                   <button
                     onClick={() => { handleCopy(); track('pix_copied', { total: totalAmount }); }}
                     className={`shrink-0 flex items-center gap-1 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
-                      copied ? 'bg-green-100 text-green-700' : 'bg-red-50 text-[#3d0f0f] hover:bg-red-100'
+                      copied ? 'bg-green-100 text-green-700' : 'bg-pink-50 text-[#3d0d25] hover:bg-pink-100'
                     }`}
                   >
                     {copied ? (
@@ -345,7 +345,7 @@ export default function CheckoutModal({ isOpen, onClose, selectedSummary, items,
             )}
 
             <div className="flex items-center justify-center gap-2 text-xs text-gray-400">
-              <Loader2 className="w-3.5 h-3.5 animate-spin text-[#3d0f0f]" />
+              <Loader2 className="w-3.5 h-3.5 animate-spin text-[#3d0d25]" />
               <span>Aguardando pagamento{pollCount > 0 ? ` (verificado ${pollCount}x)` : ''}...</span>
             </div>
 
@@ -404,7 +404,7 @@ export default function CheckoutModal({ isOpen, onClose, selectedSummary, items,
             </div>
             <button
               onClick={handleRetry}
-              className="w-full bg-gradient-to-r from-[#1a0a0a] to-[#3d0f0f] hover:from-[#0d0505] hover:to-[#5a1515] text-white font-bold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-[#1a0510] to-[#3d0d25] hover:from-[#0d0505] hover:to-[#5a1540] text-white font-bold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2"
             >
               <RefreshCw className="w-4 h-4" /> Tentar novamente
             </button>
@@ -425,7 +425,7 @@ function inputClass(hasError: boolean) {
   return `w-full pl-10 pr-4 py-3 border rounded-xl text-sm outline-none transition-colors ${
     hasError
       ? 'border-red-400 focus:border-red-500 bg-red-50'
-      : 'border-gray-200 focus:border-[#e8a838] bg-gray-50 focus:bg-white'
+      : 'border-gray-200 focus:border-[#e8a0b8] bg-gray-50 focus:bg-white'
   }`;
 }
 
