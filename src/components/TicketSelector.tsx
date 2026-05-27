@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BadgeCheck, Calendar } from 'lucide-react';
+import { BadgeCheck, Calendar, Minus, Plus } from 'lucide-react';
 import CheckoutModal from './CheckoutModal';
 import { track } from '../lib/analytics';
 
@@ -54,22 +54,33 @@ function formatCurrency(cents: number) {
 export default function TicketSelector() {
   const [selectedDate, setSelectedDate] = useState<DateId | null>(null);
   const [selected, setSelected] = useState<TicketId | null>(null);
+  const [quantities, setQuantities] = useState<Record<string, number>>({
+    'combo-amigo': 1,
+    'combo-casal': 1,
+    'inteira': 1,
+    'meia': 1,
+  });
   const [modalOpen, setModalOpen] = useState(false);
 
   const selectedTicket = TICKETS.find(t => t.id === selected) ?? null;
   const selectedDateObj = DATES.find(d => d.id === selectedDate) ?? null;
-  const totalAmount = selectedTicket ? selectedTicket.price : 0;
+  const qty = selected ? (quantities[selected] ?? 1) : 1;
+  const totalAmount = selectedTicket ? selectedTicket.price * qty : 0;
+
+  const changeQty = (id: string, delta: number) => {
+    setQuantities(prev => ({ ...prev, [id]: Math.max(1, Math.min(20, (prev[id] ?? 1) + delta)) }));
+  };
 
   const pixItems = selectedTicket
     ? [{
         title: `${selectedTicket.label} — Bruna Louise | Meus 15 Anos! (${selectedDateObj?.label ?? ''})`,
         unitPrice: selectedTicket.price,
-        quantity: 1,
+        quantity: qty,
       }]
     : [];
 
   const selectedSummary = selectedTicket && selectedDateObj
-    ? `${selectedTicket.label} — ${selectedDateObj.label}`
+    ? `${selectedTicket.label}${qty > 1 ? ` × ${qty}` : ''} — ${selectedDateObj.label}`
     : '';
 
   const canCheckout = !!selectedTicket && !!selectedDate;
@@ -107,32 +118,58 @@ export default function TicketSelector() {
           <div className="space-y-2">
             {TICKETS.map(ticket => {
               const isSelected = selected === ticket.id;
+              const ticketQty = quantities[ticket.id] ?? 1;
 
               return (
-                <button
-                  key={ticket.id}
-                  onClick={() => setSelected(isSelected ? null : ticket.id)}
-                  className={`w-full text-left border-2 rounded-xl p-4 transition-all ${
-                    isSelected
-                      ? 'border-[#3d0f0f] bg-red-50'
-                      : 'border-gray-200 hover:border-red-300'
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex-1">
-                      <h3 className="font-bold text-gray-900 text-sm">{ticket.label}</h3>
-                      {ticket.subtitle && (
-                        <p className="text-xs text-gray-500 mt-0.5">{ticket.subtitle}</p>
-                      )}
+                <div key={ticket.id}>
+                  <button
+                    onClick={() => setSelected(isSelected ? null : ticket.id)}
+                    className={`w-full text-left border-2 rounded-xl p-4 transition-all ${
+                      isSelected
+                        ? 'border-[#3d0f0f] bg-red-50 rounded-b-none'
+                        : 'border-gray-200 hover:border-red-300'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex-1">
+                        <h3 className="font-bold text-gray-900 text-sm">{ticket.label}</h3>
+                        {ticket.subtitle && (
+                          <p className="text-xs text-gray-500 mt-0.5">{ticket.subtitle}</p>
+                        )}
+                      </div>
+                      <div className="text-right flex-shrink-0">
+                        <p className="text-lg font-bold text-gray-900">{ticket.display}</p>
+                        {ticket.fixedQty > 1 && (
+                          <p className="text-xs text-gray-400">{ticket.fixedQty} pessoas</p>
+                        )}
+                      </div>
                     </div>
-                    <div className="text-right flex-shrink-0">
-                      <p className="text-lg font-bold text-gray-900">{ticket.display}</p>
-                      {ticket.fixedQty > 1 && (
-                        <p className="text-xs text-gray-400">{ticket.fixedQty} pessoas</p>
-                      )}
+                  </button>
+
+                  {isSelected && (
+                    <div className="border-x-2 border-b-2 border-[#3d0f0f] rounded-b-xl bg-red-50 px-4 py-3 flex items-center justify-between -mt-px">
+                      <span className="text-sm font-medium text-gray-700">Quantidade</span>
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={() => changeQty(ticket.id, -1)}
+                          disabled={ticketQty <= 1}
+                          className="w-8 h-8 rounded-full border-2 border-[#3d0f0f] flex items-center justify-center text-[#3d0f0f] hover:bg-[#3d0f0f] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        >
+                          <Minus className="w-3.5 h-3.5" />
+                        </button>
+                        <span className="w-6 text-center font-bold text-gray-900">{ticketQty}</span>
+                        <button
+                          onClick={() => changeQty(ticket.id, 1)}
+                          disabled={ticketQty >= 20}
+                          className="w-8 h-8 rounded-full border-2 border-[#3d0f0f] flex items-center justify-center text-[#3d0f0f] hover:bg-[#3d0f0f] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                      <span className="text-sm font-bold text-[#3d0f0f]">{formatCurrency(ticket.price * ticketQty)}</span>
                     </div>
-                  </div>
-                </button>
+                  )}
+                </div>
               );
             })}
           </div>
