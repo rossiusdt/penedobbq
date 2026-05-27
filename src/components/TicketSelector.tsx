@@ -42,7 +42,7 @@ export default function TicketSelector() {
   };
 
   const pixItems = selectedTicket
-    ? [{ title: `${selectedTicket.label} — Penedo BBQ Festival`, unitPrice: selectedTicket.price, quantity: qty }]
+    ? [{ title: `${selectedTicket.label} — Bruna Louise | Meus 15 Anos!`, unitPrice: selectedTicket.price, quantity: qty }]
     : [];
 
   const selectedSummary = selectedTicket

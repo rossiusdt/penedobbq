@@ -7,9 +7,9 @@ export default function EventLocation() {
 
       <div className="space-y-4">
         <div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">Penedo - Itatiaia/RJ</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2">Teatro Oficina do Estudante Iguatemi</h3>
           <div className="text-gray-600 space-y-1">
-            <p>Penedo, Itatiaia - RJ</p>
+            <p>3º piso do Shopping Iguatemi Campinas</p>
           </div>
         </div>
 
