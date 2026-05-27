@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BadgeCheck, Calendar } from 'lucide-react';
+import { BadgeCheck, Calendar, Minus, Plus } from 'lucide-react';
 import CheckoutModal from './CheckoutModal';
 import { track } from '../lib/analytics';
 
@@ -58,20 +58,30 @@ function formatCurrency(cents: number) {
 export default function TicketSelector() {
   const [selectedDate, setSelectedDate] = useState<DateId | null>(null);
   const [selectedTicket, setSelectedTicketId] = useState<TicketId | null>(null);
+  const [qty, setQty] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
 
   const ticket = TICKETS.find(t => t.id === selectedTicket) ?? null;
   const date = DATES.find(d => d.id === selectedDate) ?? null;
-  const totalAmount = ticket ? ticket.price : 0;
+  const totalAmount = ticket ? ticket.price * qty : 0;
+
+  const handleSelectTicket = (id: TicketId) => {
+    if (selectedTicket === id) {
+      setSelectedTicketId(null);
+    } else {
+      setSelectedTicketId(id);
+      setQty(1);
+    }
+  };
 
   const canCheckout = !!ticket && !!date;
 
   const pixItems = ticket && date
-    ? [{ title: `${ticket.label} — Bruna Louise | Meus 15 Anos (${date.label})`, unitPrice: ticket.price, quantity: 1 }]
+    ? [{ title: `${ticket.label} — Bruna Louise | Meus 15 Anos (${date.label})`, unitPrice: ticket.price, quantity: qty }]
     : [];
 
   const selectedSummary = ticket && date
-    ? `${ticket.label} · ${date.short}`
+    ? `${ticket.label}${qty > 1 ? ` × ${qty}` : ''} · ${date.short}`
     : '';
 
   return (
@@ -109,31 +119,56 @@ export default function TicketSelector() {
             {TICKETS.map(t => {
               const isSelected = selectedTicket === t.id;
               return (
-                <button
-                  key={t.id}
-                  onClick={() => setSelectedTicketId(isSelected ? null : t.id)}
-                  className={`w-full text-left border-2 rounded-xl p-4 transition-all ${
-                    isSelected
-                      ? 'border-[#3d0d25] bg-pink-50'
-                      : 'border-gray-200 hover:border-pink-300'
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex-1">
-                      {t.badge && (
-                        <span className="text-[10px] font-bold text-white bg-[#3d0d25] px-2 py-0.5 rounded-full uppercase tracking-wide mb-1.5 inline-block">
-                          {t.badge}
-                        </span>
-                      )}
-                      <h3 className="font-bold text-gray-900 text-sm">{t.label}</h3>
-                      <p className="text-xs text-gray-500 mt-0.5">{t.description}</p>
+                <div key={t.id}>
+                  <button
+                    onClick={() => handleSelectTicket(t.id)}
+                    className={`w-full text-left border-2 rounded-xl p-4 transition-all ${
+                      isSelected
+                        ? 'border-[#3d0d25] bg-pink-50 rounded-b-none'
+                        : 'border-gray-200 hover:border-pink-300'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex-1">
+                        {t.badge && (
+                          <span className="text-[10px] font-bold text-white bg-[#3d0d25] px-2 py-0.5 rounded-full uppercase tracking-wide mb-1.5 inline-block">
+                            {t.badge}
+                          </span>
+                        )}
+                        <h3 className="font-bold text-gray-900 text-sm">{t.label}</h3>
+                        <p className="text-xs text-gray-500 mt-0.5">{t.description}</p>
+                      </div>
+                      <div className="text-right flex-shrink-0">
+                        <p className="text-lg font-bold text-gray-900">{t.display}</p>
+                        <p className="text-xs text-gray-400">por combo</p>
+                      </div>
                     </div>
-                    <div className="text-right flex-shrink-0">
-                      <p className="text-lg font-bold text-gray-900">{t.display}</p>
-                      <p className="text-xs text-gray-400">por combo</p>
+                  </button>
+
+                  {isSelected && (
+                    <div className="border-x-2 border-b-2 border-[#3d0d25] rounded-b-xl bg-pink-50 px-4 py-3 flex items-center justify-between -mt-px">
+                      <span className="text-sm font-medium text-gray-700">Quantidade</span>
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={() => setQty(q => Math.max(1, q - 1))}
+                          disabled={qty <= 1}
+                          className="w-8 h-8 rounded-full border-2 border-[#3d0d25] flex items-center justify-center text-[#3d0d25] hover:bg-[#3d0d25] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        >
+                          <Minus className="w-3.5 h-3.5" />
+                        </button>
+                        <span className="w-6 text-center font-bold text-gray-900">{qty}</span>
+                        <button
+                          onClick={() => setQty(q => Math.min(20, q + 1))}
+                          disabled={qty >= 20}
+                          className="w-8 h-8 rounded-full border-2 border-[#3d0d25] flex items-center justify-center text-[#3d0d25] hover:bg-[#3d0d25] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                      <span className="text-sm font-bold text-[#3d0d25]">{formatCurrency(t.price * qty)}</span>
                     </div>
-                  </div>
-                </button>
+                  )}
+                </div>
               );
             })}
           </div>
